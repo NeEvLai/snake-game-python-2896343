@@ -3,10 +3,10 @@ import turtle
 import random
 
 # Define program constants
-WIDTH = 500
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 600
 DELAY = 100  # Milliseconds
-FOOD_SIZE = 10
+FOOD_SIZE = 20
 
 offsets = {
     "up": (0, 20),
@@ -15,13 +15,11 @@ offsets = {
     "right": (20, 0)
 }
 
-
 def bind_direction_keys():
     screen.onkey(lambda: set_snake_direction("up"), "Up")
     screen.onkey(lambda: set_snake_direction("down"), "Down")
     screen.onkey(lambda: set_snake_direction("left"), "Left")
     screen.onkey(lambda: set_snake_direction("right"), "Right")
-
 
 def set_snake_direction(direction):
     global snake_direction
@@ -37,7 +35,6 @@ def set_snake_direction(direction):
     elif direction == "right":
         if snake_direction != "left":
             snake_direction = "right"
-
 
 def game_loop():
     stamper.clearstamps()  # Remove existing stamps made by stamper.
@@ -70,7 +67,6 @@ def game_loop():
         # Rinse and repeat
         turtle.ontimer(game_loop, DELAY)
 
-
 def food_collision():
     global food_pos, score
     if get_distance(snake[-1], food_pos) < 20:
@@ -80,19 +76,16 @@ def food_collision():
         return True
     return False
 
-
 def get_random_food_pos():
     x = random.randint(- WIDTH / 2 + FOOD_SIZE, WIDTH / 2 - FOOD_SIZE)
     y = random.randint(- HEIGHT / 2 + FOOD_SIZE, HEIGHT / 2 - FOOD_SIZE)
     return (x, y)
-
 
 def get_distance(pos1, pos2):
     x1, y1 = pos1
     x2, y2 = pos2
     distance = ((y2 - y1) ** 2 + (x2 - x1) ** 2) ** 0.5  # Pythagoras' Theorem
     return distance
-
 
 def reset():
     global score, snake, snake_direction, food_pos
@@ -102,7 +95,6 @@ def reset():
     food_pos = get_random_food_pos()
     food.goto(food_pos)
     game_loop()
-
 
 # Create a window where we will do our drawing.
 screen = turtle.Screen()
@@ -117,13 +109,13 @@ bind_direction_keys()
 
 # Create a turtle to do your bidding
 stamper = turtle.Turtle()
-stamper.shape("square")
+stamper.shape("circle")
 stamper.penup()
 
 # Food
 food = turtle.Turtle()
-food.shape("circle")
-food.color("red")
+food.shape("turtle")
+food.color("green")
 food.shapesize(FOOD_SIZE / 20)
 food.penup()
 
