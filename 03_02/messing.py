@@ -61,7 +61,7 @@ def game_loop():
             stamper.stamp()
 
         # Refresh screen
-        screen.title(f"Snake Game. Score: {score}")
+        screen.title(f"Snake Game. Score: {score}. Speed: {delay}")
         screen.update()
 
         # Rinse and repeat
@@ -70,10 +70,11 @@ def game_loop():
 def food_collision():
     global food_pos, score, delay
     if get_distance(snake[-1], food_pos) < 20:
-        score += 1  # score = score + 1
-        delay -= 10
+        score += 10
         food_pos = get_random_food_pos()
         food.goto(food_pos)
+        if delay >= 35:
+            delay -= 5
         return True
     return False
 
@@ -91,7 +92,7 @@ def get_distance(pos1, pos2):
 def reset():
     global score, snake, snake_direction, food_pos, delay
     score = 0
-    delay = 200
+    delay = 250
     snake = [[0, 0], [20, 0], [40, 0], [60, 0]]
     snake_direction = "up"
     food_pos = get_random_food_pos()
