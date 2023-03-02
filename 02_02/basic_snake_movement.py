@@ -4,23 +4,46 @@ import turtle
 # Define program constants
 WIDTH = 500
 HEIGHT = 500
+DELAY = 400 # MILLISENCONDS between updates
+
+def move_snake():
+    stamper.clearstamps()
+
+    new_head = snake[-1].copy()
+    new_head[0] += 20
+
+    snake.append(new_head)
+
+    snake.pop(0)
+
+    for segment in snake:
+        stamper.goto(segment[0], segment[1])
+        stamper.stamp()
+
+    screen.update()
+
+    turtle.ontimer(move_snake, DELAY)
+
 
 # Create a window where we will do our drawing.
 screen = turtle.Screen()
 screen.setup(WIDTH, HEIGHT)  # Set the dimensions of the Turtle Graphics window.
-screen.title("Stamping")
-screen.bgcolor("cyan")
+screen.title("Snake")
+screen.bgcolor("pink")
+screen.tracer(0)
 
 # Create a turtle to do your bidding
 stamper = turtle.Turtle()
 stamper.shape("square")
-stamper.color("red")
-stamper.shapesize(50 / 20)
-stamper.stamp()
 stamper.penup()
-stamper.shapesize(10 / 20)
-stamper.goto(100, 100)
-stamper.stamp()
 
-# This statement (or an equivalent) is needed at the end of all your turtle programs.
+snake = [[0,0],[20,0],[40,0],[60,0]]
+
+for segment in snake:
+    stamper.goto(segment[0], segment[1])
+    stamper.stamp()
+
+move_snake()
+
+# Finish
 turtle.done()
