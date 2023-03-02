@@ -3,8 +3,8 @@ import turtle
 import random
 
 # Define program constants
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 500
+HEIGHT = 350
 # DELAY = 100  # Milliseconds
 FOOD_SIZE = 20
 
